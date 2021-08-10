@@ -1,26 +1,28 @@
 package com.phael.personApi.controller;
 
 
+import com.phael.personApi.dto.response.MessageResponseDTO;
 import com.phael.personApi.entity.Person;
-import com.phael.personApi.repository.PersonRepository;
+import com.phael.personApi.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/people")
 public class PersonController {
 
-    private PersonRepository personRepository;
+    private PersonService personService;
 
     @Autowired
-    public PersonController(PersonRepository personRepository) {
-        this.personRepository = personRepository;
+    public PersonController(PersonService personService) {
+        this.personService = personService;
     }
 
     @PostMapping
-    public MessageResponseDTO String createPerson(@RequestBody Person person){
-        Person savedPerson = personRepository.save(person);
-        return "API test";
+    @ResponseStatus(HttpStatus.CREATED)
+    public MessageResponseDTO createPerson(@RequestBody Person person) {
+        return personService.createPerson(person);
     }
 
 }
