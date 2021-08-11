@@ -1,6 +1,7 @@
 package com.phael.personApi.controller;
 
 
+import com.phael.personApi.dto.request.PersonDTO;
 import com.phael.personApi.dto.response.MessageResponseDTO;
 import com.phael.personApi.entity.Person;
 import com.phael.personApi.service.PersonService;
@@ -21,8 +22,8 @@ public class PersonController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MessageResponseDTO createPerson(@RequestBody Person person) {
-        return personService.createPerson(person);
+    public MessageResponseDTO createPerson(@RequestBody PersonDTO personDTO) {
+        return personService.createPerson(personDTO);
     }
 
 }

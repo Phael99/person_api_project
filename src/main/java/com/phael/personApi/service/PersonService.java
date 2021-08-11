@@ -1,5 +1,6 @@
 package com.phael.personApi.service;
 
+import com.phael.personApi.dto.request.PersonDTO;
 import com.phael.personApi.dto.response.MessageResponseDTO;
 import com.phael.personApi.entity.Person;
 import com.phael.personApi.repository.PersonRepository;
@@ -17,8 +18,11 @@ public class PersonService {
     }
 
 
-    public MessageResponseDTO createPerson(Person person) {
-        Person savedPerson = personRepository.save(person);
+    public MessageResponseDTO createPerson(PersonDTO personDTO) {
+
+        Person personToSave = Person.builder().build();
+
+        Person savedPerson = personRepository.save(personDTO);
         return MessageResponseDTO
                 .builder()
                 .message("Created person with ID " + savedPerson.getId())
