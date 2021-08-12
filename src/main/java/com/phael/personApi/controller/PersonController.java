@@ -3,7 +3,7 @@ package com.phael.personApi.controller;
 
 import com.phael.personApi.dto.request.PersonDTO;
 import com.phael.personApi.dto.response.MessageResponseDTO;
-import com.phael.personApi.entity.Person;
+import com.phael.personApi.exception.PersonNotFoundException;
 import com.phael.personApi.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,6 +31,11 @@ public class PersonController {
     @GetMapping
     public List<PersonDTO> listAll(){
         return personService.listAll();
+    }
+
+    @GetMapping("/{id}")
+    public PersonDTO findById(@PathVariable  Long id) throws PersonNotFoundException {
+        return personService.findById(id);
     }
 
 }
